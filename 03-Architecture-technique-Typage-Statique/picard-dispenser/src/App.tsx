@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/home";
+import Products from "./pages/products";
+import AddProduct from "./pages/addProduct";
+import { useState } from "react";
+import type { Product } from "./types/product";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [products, setProducts] = useState<Product[]>([]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="w-full min-h-screen bg-gray-100 flex flex-col">
+      <Router>
+        <nav className="flex gap-6 p-4 bg-picardblue shadow-md">
+          <Link to="/" className="hover:underline">Accueil</Link>
+          <Link to="/products" className="hover:underline">Produits</Link>
+          <Link to="/add" className="hover:underline">Ajouter</Link>
+        </nav>
 
-export default App
+        <main className="flex-1 flex items-center justify-center p-6">
+          <div className="w-full max-w-3xl bg-picardblue rounded-2xl shadow-lg p-6">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/products"
+                element={<Products products={products} />}
+              />
+              <Route
+                path="/add"
+                element={<AddProduct products={products} setProducts={setProducts} />}
+              />
+            </Routes>
+          </div>
+        </main>
+      </Router>
+    </div>
+  );
+}
