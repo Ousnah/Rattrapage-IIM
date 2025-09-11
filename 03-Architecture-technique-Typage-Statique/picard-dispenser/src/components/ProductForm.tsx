@@ -15,6 +15,7 @@ export default function ProductForm({ onSubmit }: ProductFormProps) {
     priceEuro: "",
     quantity: 0,
     rating: 0,
+    image: "/images/test.jpg",
     available: true,
     expirationDate: "",
   });
@@ -44,16 +45,17 @@ export default function ProductForm({ onSubmit }: ProductFormProps) {
     }
 
     const product: Product = {
-      id: uuid(),
-      name: form.name,
-      description: form.description,
-      priceEuro: form.priceEuro, 
-      priceCents: eurosToCents(form.priceEuro)!,
-      quantity: form.quantity,
-      rating: form.rating,
-      available: form.available,
-      expirationDate: form.expirationDate,
-      createdAt: new Date().toISOString(),
+        id: uuid(),
+        name: form.name.trim(),
+        description: form.description.trim(),
+        priceEuro: form.priceEuro.trim(), 
+        priceCents: eurosToCents(form.priceEuro)!,
+        quantity: Number(form.quantity),         
+        rating: Number(form.rating),
+        image: form.image.trim(), 
+        available: !!form.available,
+        expirationDate: form.expirationDate,
+        createdAt: new Date().toISOString(),
     };
 
     onSubmit(product);
@@ -64,6 +66,7 @@ export default function ProductForm({ onSubmit }: ProductFormProps) {
       priceEuro: "",
       quantity: 0,
       rating: 0,
+      image: "/images/test.jpg",
       available: true,
       expirationDate: "",
     });

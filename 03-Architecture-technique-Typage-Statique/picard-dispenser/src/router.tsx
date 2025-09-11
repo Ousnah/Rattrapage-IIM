@@ -10,8 +10,8 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      { path: "products", element: <Products /> },
-      { path: "add", element: <AddProduct /> },
+      { path: "products", element: <Products products={[]} setProducts={() => {}} /> },
+      { path: "add", element: <AddProduct products={[]} setProducts={() => {}} /> },
     ],
   },
 ]);

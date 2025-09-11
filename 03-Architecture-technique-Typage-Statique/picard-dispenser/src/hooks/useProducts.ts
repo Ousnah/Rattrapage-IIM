@@ -33,9 +33,13 @@ export function useProducts() {
 
   function updateQuantity(id: string, delta: number) {
     setProducts((prev) =>
-      prev.map((p) =>
-        p.id === id ? { ...p, quantity: Math.max(0, p.quantity + delta) } : p
-      )
+        prev.map((p) => {
+          if (p.id !== id) return p;
+          const current = Number(p.quantity);
+          const safeCurrent = Number.isFinite(current) ? current : 0;
+          const newQty = Math.max(0, Math.round(safeCurrent + delta));
+          return { ...p, quantity: newQty };
+        })
     );
   }
 

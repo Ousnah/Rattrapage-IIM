@@ -17,24 +17,51 @@ export default function AddProduct({ products, setProducts }: AddProductProps) {
     quantity: 0,
     rating: 0,
     available: true,
+    image: "", 
     expirationDate: "",
     createdAt: new Date().toISOString(),
   });
 
   const navigate = useNavigate();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target as HTMLInputElement | HTMLTextAreaElement;
-    const checked = type === "checkbox" ? (e.target as HTMLInputElement).checked : false;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value, type } = e.target;
+    const checked =
+      type === "checkbox" ? (e.target as HTMLInputElement).checked : false;
+
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]:
+        type === "checkbox"
+          ? checked
+          : type === "number"
+          ? value === ""
+            ? ""
+            : Number(value)
+          : value,
     }));
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+
+      setFormData((prev) => ({
+        ...prev,
+        image: imageUrl, 
+      }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setProducts([...products, formData]);
+
+    const newProduct = { ...formData, id: crypto.randomUUID() };
+
+    setProducts([...products, newProduct]);
     navigate("/products");
   };
 
@@ -45,7 +72,7 @@ export default function AddProduct({ products, setProducts }: AddProductProps) {
         name="name"
         placeholder="Nom du produit"
         value={formData.name}
-        onChange={(e) => handleChange(e)}
+        onChange={handleChange}
         required
         className="border p-2 rounded"
       />
@@ -84,6 +111,19 @@ export default function AddProduct({ products, setProducts }: AddProductProps) {
         required
         className="border p-2 rounded"
       />
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageChange}
+        className="border p-2 rounded"
+      />
+      {formData.image && (
+        <img
+          src={formData.image}
+          alt="Aperçu"
+          className="w-32 h-32 object-cover rounded border"
+        />
+      )}
       <input
         type="date"
         name="expirationDate"

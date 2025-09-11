@@ -6,8 +6,8 @@ export interface Product {
   priceCents: number;
   quantity: number;
   rating: number;
+  image: string;
   available: boolean;
-  imageUrl: string;
   expirationDate: string;
   createdAt: string;
 }
@@ -18,7 +18,7 @@ export interface NewProductInput {
   priceEuro: string;
   quantity: number;
   rating: number;
+  image: string;
   available: boolean;
-  imageUrl: string;
   expirationDate: string;
 }

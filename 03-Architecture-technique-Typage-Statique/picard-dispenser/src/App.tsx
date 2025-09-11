@@ -23,8 +23,9 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route
                 path="/products"
-                element={<Products products={products} />}
+                element={<Products products={products} setProducts={setProducts} />}
               />
+              
               <Route
                 path="/add"
                 element={<AddProduct products={products} setProducts={setProducts} />}
