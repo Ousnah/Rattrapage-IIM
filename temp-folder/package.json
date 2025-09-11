@@ -1,0 +1,37 @@
+{
+  "name": "tinylog-cli",
+  "version": "1.0.0",
+  "description": "A tiny CLI logger: colored, timestamped console output and optional file append.",
+  "keywords": ["cli","logger","tiny","log","console"],
+  "author": "Ousnah <agrewilliam@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+
+  "bin": {
+    "tinylog": "./bin/tinylog.js"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "mkdir -p lib && cp src/index.js lib/index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "lint": "npx eslint src --ext .js",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "files": [
+    "lib",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "eslint": "^8.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "yargs": "^17.0.0"
+  }
+}
