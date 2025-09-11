@@ -11,3 +11,4 @@ npm install -g tinylog-cli
 npm link
 
 https://www.npmjs.com/package/tinylog-cli
+https://www.youtube.com/watch?v=H7kq3LzXp9G
