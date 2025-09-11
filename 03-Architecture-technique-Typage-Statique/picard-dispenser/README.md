@@ -1,4 +1,4 @@
-📦 Picard Distributor – Product Management
+📦 Picard Dispenser – Product Management
 
 A front-end React + TypeScript application to manage products and stocks in Picard distributors.
 It allows adding, editing, and deleting products, with image upload and live preview support.
