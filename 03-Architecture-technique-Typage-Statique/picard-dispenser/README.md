@@ -71,4 +71,4 @@ React Router
 Tailwind CSS
  (utility-first styling)
 
- https://www.youtube.com/watch?v=aQ2mDz4VYtc
+https://www.youtube.com/watch?v=aQ2mDz4VYtc
